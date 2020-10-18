@@ -1,0 +1,48 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 20px;
+}
+.title-page {
+  text-align: center;
+  font-size: 40px;
+  margin: 20px;
+}
+.article-title {
+  display: grid;
+  grid-template-areas: "legend-title input-title" "legend-filename  input-filename";
+  grid-template-columns: 180px 1fr;
+  grid-template-rows: 60px 60px;
+}
+.article-title-legend-title {
+  grid-area: legend-title;
+  justify-self: end;
+  align-self: center;
+}
+.article-title-legend-filename {
+  grid-area: legend-filename;
+  justify-self: end;
+  align-self: center;
+}
+.article-title-input-title {
+  grid-area: input-title;
+  padding-left: 20px;
+  padding-right: 30px;
+  align-self: center;
+}
+.article-title-input-filename {
+  grid-area: input-filename;
+  padding-left: 20px;
+  padding-right: 30px;
+  align-self: center;
+}
+input {
+  height: 30px;
+  width: 100%;
+}
+p {
+  display: inline;
+}
+.decoration {
+  border: 2px solid #008894;
+  border-width: 30px 2px 2px 2px;
+}

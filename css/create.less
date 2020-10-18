@@ -1,0 +1,72 @@
+body {
+    // display: flex;
+    // justify-content: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+}
+
+.title-page {
+    text-align: center;
+    font-size: 40px;
+    margin: 20px;
+}
+
+.article-title {
+    display: grid;
+
+    grid-template-areas:
+        "legend-title input-title"
+        "legend-filename  input-filename";
+    grid-template-columns: 180px 1fr;
+    grid-template-rows: 60px 60px;
+
+    &-legend {
+        &-title {
+            grid-area: legend-title;
+            // border: 1px solid red;
+            justify-self: end;
+            align-self: center;
+        }
+
+        &-filename {
+            grid-area: legend-filename;
+            // border: 1px solid red;
+            justify-self: end;
+            align-self: center;
+        }
+    }
+
+    &-input {
+
+        &-title {
+            grid-area: input-title;
+            // border: 1px solid red;
+            padding-left: 20px;
+            padding-right: 30px;
+            align-self: center;
+        }
+
+        &-filename {
+            grid-area: input-filename;
+            // border: 1px solid red;
+            padding-left: 20px;
+            padding-right: 30px;
+            align-self: center;
+        }
+    }
+}
+
+input {
+    height: 30px;
+    width: 100%;
+    // margin-right: 100px;
+}
+
+p {
+    display: inline;
+}
+
+.decoration {
+    border: 2px solid #008894;
+    border-width: 30px 2px 2px 2px;
+}
