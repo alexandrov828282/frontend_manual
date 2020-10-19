@@ -2,6 +2,12 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 20px;
 }
+.wrap-global {
+  max-width: 1200px;
+  margin: auto auto;
+  border: 1px solid red;
+  padding-right: 37px;
+}
 .title-page {
   text-align: center;
   font-size: 40px;
@@ -9,9 +15,9 @@ body {
 }
 .article-title {
   display: grid;
-  grid-template-areas: "legend-title input-title" "legend-filename  input-filename";
-  grid-template-columns: 180px 1fr;
-  grid-template-rows: 60px 60px;
+  grid-template-areas: "legend-title     input-title              input-title" "legend-filename  input-filename           input-filename" "notuse           filename-manual-check    filename-manual-check-legend";
+  grid-template-columns: 130px 60px 1fr;
+  grid-template-rows: 60px 60px 32px;
 }
 .article-title-legend-title {
   grid-area: legend-title;
@@ -26,21 +32,44 @@ body {
 .article-title-input-title {
   grid-area: input-title;
   padding-left: 20px;
-  padding-right: 30px;
   align-self: center;
 }
 .article-title-input-filename {
   grid-area: input-filename;
   padding-left: 20px;
-  padding-right: 30px;
+  align-self: center;
+}
+.article-title-filename-manual-check {
+  grid-area: filename-manual-check;
+  justify-self: start;
+  width: 68px;
+}
+.article-title-filename-manual-check-legend {
+  grid-area: filename-manual-check-legend;
   align-self: center;
 }
 input {
   height: 30px;
   width: 100%;
+  font-size: 25px;
 }
 p {
   display: inline;
+}
+h1 {
+  font-size: 60px;
+  color: #008894;
+}
+h2 {
+  text-align: center;
+  color: #008894;
+  margin-top: 80px;
+}
+textarea {
+  width: 98%;
+  height: 300px;
+  margin-left: 25px;
+  margin-right: 60px;
 }
 .decoration {
   border: 2px solid #008894;
