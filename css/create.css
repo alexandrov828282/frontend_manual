@@ -6,7 +6,7 @@ body {
   max-width: 1200px;
   margin: auto auto;
   border: 1px solid red;
-  padding-right: 37px;
+  padding-right: 45px;
   padding-left: 37px;
 }
 .article-title {
@@ -54,26 +54,26 @@ p {
 }
 h1 {
   font-size: 60px;
-  color: #008894;
+  color: #b0887e;
   text-align: center;
 }
 h2 {
   text-align: center;
-  color: #008894;
+  color: #b0887e;
   margin-top: 80px;
 }
 textarea {
-  width: 1193px;
+  width: 100%;
   height: 300px;
   resize: none;
 }
 button {
   font-size: 15px;
-  background: #008894;
+  background: #b0887e;
   color: #fff;
   border: none;
   padding: 8px;
-  border-radius: 10px;
+  border-radius: 5px;
   margin-left: 3px;
 }
 .button-add-link {
@@ -111,5 +111,25 @@ li:not(:last-of-type) {
 }
 .final-block {
   width: 100%;
-  height: 300px;
+  height: 150px;
+}
+.border {
+  border: 1px solid black;
+}
+.technology {
+  display: flex;
+}
+.partition {
+  display: flex;
+}
+select {
+  width: 100%;
+}
+.button-edit {
+  display: flex;
+  width: 250px;
+  justify-content: flex-end;
+}
+.button-edit button {
+  width: 100%;
 }
