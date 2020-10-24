@@ -137,7 +137,7 @@
 // }
 
 
-let separator = [
+let separatorSymbols = [
     "~",
     "`",
     "!",
@@ -160,30 +160,80 @@ let separator = [
     "=",
     "\\",
     "|",
+    ' ',
+    '.'
 ];
 
-let jsMethodElems = ['.method1(','.method2(','.method3('];
+let currentWord = '';
+let newHtmlString = [];
+// let coincide = false;
 
-let indexMarkBegin = 0;
-let indexMarkEnd = 0;
-let indexOrdinaryBegin = 0;
-let indexOrdinaryEnd = 0;
-let finalStr = '';
-let selectStr = '';
+let jsMethodElems = ['method1','method2','method3'];
 
 let htmlTagElems = document.getElementsByClassName("highlight");
 
-for (let htmlTagElem of htmlTagElems) {
-    temptext = htmlTagElem.innerHTML;
-    let htmlSymbols = temptext.split('');
-    for (let htmlSymbol of htmlSymbols) {
-        for (let separatorSymbol of separatorSymbols) {
-            if (htmlSymbol != separatorSymbol){
-                
-            }
-        }
+coincide = str => {
+    for (let separatorSymbol of separatorSymbols) {
+        if (str == separatorSymbol) return true; 
     }
+    return false;
+}
+
+for (let htmlTagElem of htmlTagElems) {
+    let htmlSymbols = htmlTagElem.innerHTML.split('');
+    
+    for (let htmlSymbol of htmlSymbols) {
+        
+        // coincide = false;
+        // for (let separatorSymbol of separatorSymbols) {
+        //     if (htmlSymbol == separatorSymbol) coincide = true;
+        // }
+
+        if (coincide(htmlSymbol)){
+            for (let jsMethodElem of jsMethodElems) {
+                if (currentWord == jsMethodElem){
+                    w(`совпадение ${currentWord} == ${jsMethodElem}`);
+                }
+                else{
+                    w(`НЕ совпадение ${currentWord} != ${jsMethodElem}`);
+                }
+            }
+            currentWord = '';
+        }
+        else{
+            currentWord += htmlSymbol;
+        }
+
+    }
+
 }
 
 
+
+
+// currentWord += htmlSymbol;
+        //     }
+        //     else{
+        //         console.log(currentWord);
+        //         currentWord = '';
+    //             for (let jsMethodElem of jsMethodElems) {
+    //                 if (currentWord == jsMethodElem){
+    //                     newHtmlString.push(` <span class="method">${currentWord}</span>`);
+    //                 }
+    //                 else{
+    //                     newHtmlString.push(currentWord);
+    //                     currentWord = '';
+    //                 }
+    //             }
+        //     }
+        // }
+    // }
+    
+    // htmlTagElem.innerHTML = newHtmlString.join('');
+    // console.log(htmlSymbols);
+// }
+
+function w(str){
+    console.log(str)
+} 
 
