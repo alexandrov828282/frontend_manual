@@ -18,8 +18,9 @@
 .search-block-wrap input {
   flex-grow: 1;
 }
-html {
+body {
   font-family: Arial, Helvetica, sans-serif;
+  counter-reset: section;
 }
 .global-wrap {
   display: flex;
@@ -29,6 +30,7 @@ html {
   max-width: 1200px;
   margin: auto auto;
   background-color: rgba(255, 0, 0, 0);
+  padding: 30px;
 }
 hr {
   border: none;
@@ -90,4 +92,23 @@ h2 {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+}
+.sintaxis .code {
+  background-image: linear-gradient(90deg, transparent 40px, #aaa 40px, #aaa 40px, transparent 43px), linear-gradient(#eee 1px, transparent 0px), linear-gradient(90deg, #eee 1px, transparent 0px);
+  background-size: 100% 100%, 20px 20px, 20px 20px;
+  background-position: 0 0, -1px -1px, -1px 1px;
+}
+.sintaxis .code .highlight {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 18px;
+  font-weight: 300;
+}
+.sintaxis .code .highlight .jsMethod {
+  color: blue;
+}
+.highlight::before {
+  counter-increment: section;
+  content: counter(section);
+  margin: 0 20px 0 20px;
+  color: #bbb;
 }
