@@ -35,6 +35,7 @@ body {
     justify-content: center;
     align-items: center;
     max-width: 1200px;
+    min-width: 700px;
     margin: auto auto;
     background-color: @colormarking;
     padding: 30px;
@@ -118,13 +119,11 @@ h2 {
     }
 
     .code {
-        // font-family: "Courier New", Courier, monospace;
-        // font-size: 50px;
-        // font-weight: 300;
         background-image: linear-gradient(90deg, transparent 40px, #aaa 40px, #aaa 40px, transparent 43px), 
             linear-gradient(#eee 1px, transparent 0px), linear-gradient(90deg, #eee 1px, transparent 0px);
         background-size: 100% 100%, 20px 20px, 20px 20px;
         background-position: 0 0, -1px -1px, -1px 1px;
+        margin: 30px;
         
         
 
@@ -132,12 +131,7 @@ h2 {
             font-family: "Courier New", Courier, monospace;
             font-size: 18px;
             font-weight: 300;
-            // ::before{
-            //     counter-increment: section;
-            //     content: counter(section);
-            //     margin: 0 20px 0 20px;
-            // }
-
+            
             .jsMethod {
                 color: blue;
             }
@@ -150,6 +144,6 @@ h2 {
         content: counter(section);
         margin: 0 20px 0 20px;
         color: #bbb;
-    }
+}
 
 
