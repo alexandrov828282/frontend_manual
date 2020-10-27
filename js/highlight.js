@@ -45,6 +45,9 @@ let allHighlightElems = {
     },
 };
 
+//уйдем от разделителей, будем встречать ключевые слова в объекте allHighlightElems и красить их, 
+//важно распологать элементы в объекте от самых больших по длинне к самым маленьким
+
 let htmlTagElems = document.getElementsByClassName("highlight");
 let htmlText = '';
 
@@ -52,20 +55,36 @@ for (let htmlTagElem of htmlTagElems) {
 
     htmlText = htmlTagElem.innerHTML;
     let numSymbol = 0;
-    while(numSymbol < htmlText.length){
 
+    let flag = false;
+    while(numSymbol < htmlText.length){
+        flag = false;
         for (let separatorSymbol of separatorSymbols) {
+
+            w(`строка = ${htmlText},\n\nnumSymbol = ${numSymbol} = ${htmlText.substr(numSymbol, separatorSymbol.length)}  separatorSymbol = ${separatorSymbol}`);
             
-            if (numSymbol+separatorSymbol.length > htmlText.length) continue;
-            
+            if (numSymbol+separatorSymbol.length > htmlText.length){
+                w(`сработало условие - длинна разделителя больше, чем остаток html строки 
+                numSymbol+separatorSymbol.length > htmlText.length : 
+                ${numSymbol}+${separatorSymbol.length} > ${htmlText.length}`);
+                continue;
+            } 
+
             if(htmlText.substr(numSymbol, separatorSymbol.length) == separatorSymbol){
-                w(separatorSymbol);
+                w(`совпадение: ${separatorSymbol}`);
                 numSymbol += separatorSymbol.length;
+                w(`следующий символ: numSymbol = ${numSymbol} = ${htmlText.substr(numSymbol, 1)}`);
+                flag = true;
                 break;
             }
         }
         
-        numSymbol++;
+        //если отработала итерация в условии выше, то эту терацию делать не надо
+        if (!flag) {
+            numSymbol++;
+            w(`следующий символ: numSymbol = ${numSymbol} = ${htmlText.substr(numSymbol, 1)}`);
+        }
+
     }
 
 }
