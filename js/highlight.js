@@ -1,94 +1,168 @@
-let separatorSymbols = [
-    "&lt;",
-    "&gt;",
-    "//",
-    "\\",
-    "~",
-    "`",
-    "!",
-    "@",
-    '"',
-    "#",
-    "$",
-    ";",
-    "%",
-    "^",
-    ":",
-    "?",
-    "*",
-    "(",
-    ")",
-    "-",
-    "+",
-    "*",
-    "/",
-    "=",
-    "|",
-    " ",
-    ".",
-    "<",
-    ">"
-];
+// let separatorSymbols = [
+//     "&lt;",
+//     "&gt;",
+//     "//",
+//     "\\",
+//     "~",
+//     "`",
+//     "!",
+//     "@",
+//     '"',
+//     "#",
+//     "$",
+//     ";",
+//     "%",
+//     "^",
+//     ":",
+//     "?",
+//     "*",
+//     "(",
+//     ")",
+//     "-",
+//     "+",
+//     "*",
+//     "/",
+//     "=",
+//     "|",
+//     " ",
+//     ".",
+//     "<",
+//     ">"
+// ];
 
-let currentWord = "";
+// let currentWord = "";
+
+let a = 0;
 let newHtmlString = [];
+let htmlText = '';
+let numSymbol = 0;
+let currentWord = '';
+
+// debugger;
 
 let allHighlightElems = {
     js: {
-        Method: ["concat"],
-        Object: ["object1", "object2", "object3"],
-        Property: ["property1", "property2", "property3"],
+        Method: ['concat'],
+        Object: ['object1', 'object2', 'object3'],
+        Property: ['property1', 'property2', 'property3'],
     },
 
     html: {
-        Tag: ["br", "div", "h1"],
+        Tag: ['<br>', '<div>', '<h1>', '</a>', '<a', 'href'],
     },
 };
 
-//уйдем от разделителей, будем встречать ключевые слова в объекте allHighlightElems и красить их, 
-//важно распологать элементы в объекте от самых больших по длинне к самым маленьким
+w(allHighlightElems.html.Tag);
+w(allHighlightElems.html.Tag.length);
+w(allHighlightElems.html.Tag.constructor === Array);
+debugger;
 
-let htmlTagElems = document.getElementsByClassName("highlight");
-let htmlText = '';
+let tmpStr;
+allHighlightElems.html.Tag.forEach((elems,i) => {
+    tmpStr = '';
+    for (let elem of elems) {
+        if (elem == '<') tmpStr += '&lt;';
+        else if (elem == '>') tmpStr += '&gt;';
+        else tmpStr += elem;
+    }
+    
+})();
+
+let htmlTagElems = document.getElementsByClassName('highlight');
 
 for (let htmlTagElem of htmlTagElems) {
-
+    a = 0;
+    newHtmlString = [];
     htmlText = htmlTagElem.innerHTML;
-    let numSymbol = 0;
+    numSymbol = 0;
+    currentWord = '';
 
-    let flag = false;
-    while(numSymbol < htmlText.length){
-        flag = false;
-        for (let separatorSymbol of separatorSymbols) {
+    while (numSymbol < htmlText.length) {
+        for (let elemTechnology in allHighlightElems) {
+            for (let elemSection in allHighlightElems[elemTechnology]) {
+                for (let elem of allHighlightElems[elemTechnology][elemSection]) {
+                    //=========
+                    w('elem = ', elem);
 
-            w(`строка = ${htmlText},\n\nnumSymbol = ${numSymbol} = ${htmlText.substr(numSymbol, separatorSymbol.length)}  separatorSymbol = ${separatorSymbol}`);
-            
-            if (numSymbol+separatorSymbol.length > htmlText.length){
-                w(`сработало условие - длинна разделителя больше, чем остаток html строки 
-                numSymbol+separatorSymbol.length > htmlText.length : 
-                ${numSymbol}+${separatorSymbol.length} > ${htmlText.length}`);
-                continue;
-            } 
+                    //===============
+                    w('htmlText.substr(numSymbol, elem.length) = ', htmlText.substr(numSymbol, elem.length));
+                    w('numSymbol = ', numSymbol);
+                    w('elem.length = ', elem.length);
+                    w('numSymbol + elem.length = ', numSymbol + elem.length);
+                    a = 0;
+                    if (numSymbol + elem.length > htmlText.length) {
+                        //===============
+                        w('сработало условие: numSymbol + elem.length > htmlText.length');
+                        continue;
+                    }
 
-            if(htmlText.substr(numSymbol, separatorSymbol.length) == separatorSymbol){
-                w(`совпадение: ${separatorSymbol}`);
-                numSymbol += separatorSymbol.length;
-                w(`следующий символ: numSymbol = ${numSymbol} = ${htmlText.substr(numSymbol, 1)}`);
-                flag = true;
-                break;
+                    if (htmlText.substr(numSymbol, elem.length) == elem) {
+                        //==============
+                        w('совпадение');
+
+                        //действия при совпадении
+                        currentWord += `<span class="${elemTechnology}${elemSection}">${currentWord}</span>`;
+                        numSymbol += elem.length;
+                        //==============
+                        w('currentWord = ', currentWord);
+                        break;
+                    }
+                    currentWord += numSymbol;
+                    w('currentWord = ', currentWord);
+                }
             }
         }
-        
-        //если отработала итерация в условии выше, то эту терацию делать не надо
-        if (!flag) {
-            numSymbol++;
-            w(`следующий символ: numSymbol = ${numSymbol} = ${htmlText.substr(numSymbol, 1)}`);
-        }
-
+        numSymbol++;
     }
-
+    newHtmlString.push(currentWord);
+    htmlTagElem.innerHTML = newHtmlString.join('');
+    newHtmlString.length = 0;
 }
 
+// currentWord = "";
+
+//    currentWord += htmlSymbol;
+
+// let htmlTagElems = document.getElementsByClassName("highlight");
+// let htmlText = '';
+
+// for (let htmlTagElem of htmlTagElems) {
+
+//     htmlText = htmlTagElem.innerHTML;
+//     let numSymbol = 0;
+
+//     let flag = false;
+//     while(numSymbol < htmlText.length){
+//         flag = false;
+//         for (let separatorSymbol of separatorSymbols) {
+
+//             w(`строка = ${htmlText},\n\nnumSymbol = ${numSymbol} = ${htmlText.substr(numSymbol, separatorSymbol.length)}  separatorSymbol = ${separatorSymbol}`);
+
+//             if (numSymbol+separatorSymbol.length > htmlText.length){
+//                 w(`сработало условие - длинна разделителя больше, чем остаток html строки
+//                 numSymbol+separatorSymbol.length > htmlText.length :
+//                 ${numSymbol}+${separatorSymbol.length} > ${htmlText.length}`);
+//                 continue;
+//             }
+
+//             if(htmlText.substr(numSymbol, separatorSymbol.length) == separatorSymbol){
+//                 w(`совпадение: ${separatorSymbol}`);
+//                 numSymbol += separatorSymbol.length;
+//                 w(`следующий символ: numSymbol = ${numSymbol} = ${htmlText.substr(numSymbol, 1)}`);
+//                 flag = true;
+//                 break;
+//             }
+//         }
+
+//         //если отработала итерация в условии выше, то эту терацию делать не надо
+//         if (!flag) {
+//             numSymbol++;
+//             w(`следующий символ: numSymbol = ${numSymbol} = ${htmlText.substr(numSymbol, 1)}`);
+//         }
+
+//     }
+
+// }
 
 //встретился ли разделитель
 // separatorOn = (str) => {
