@@ -52,21 +52,24 @@ let allHighlightElems = {
     },
 };
 
+//=======================================
 w(allHighlightElems.html.Tag);
 w(allHighlightElems.html.Tag.length);
 w(allHighlightElems.html.Tag.constructor === Array);
 debugger;
+//=======================================
 
-let tmpStr;
-allHighlightElems.html.Tag.forEach((elems,i) => {
-    tmpStr = '';
+let newArr;
+(allHighlightElems.html.Tag.forEach((elems,i) => {
+    // tmpStr = ''
     for (let elem of elems) {
         if (elem == '<') tmpStr += '&lt;';
         else if (elem == '>') tmpStr += '&gt;';
         else tmpStr += elem;
+        0
     }
     
-})();
+})());
 
 let htmlTagElems = document.getElementsByClassName('highlight');
 
