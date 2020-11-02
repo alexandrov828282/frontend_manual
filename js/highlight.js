@@ -59,7 +59,7 @@ w(allHighlightElems.html.Tag.constructor === Array);
 debugger;
 //=======================================
 
-let newArr;
+let newArr = [];
 (allHighlightElems.html.Tag.forEach((elems,i) => {
     // tmpStr = ''
     for (let elem of elems) {
