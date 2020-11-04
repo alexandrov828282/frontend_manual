@@ -32,11 +32,11 @@
 
 // let currentWord = "";
 
-let a = 0;
-let newHtmlString = [];
-let htmlText = '';
-let numSymbol = 0;
-let currentWord = '';
+// let a = 0;
+// let newHtmlString = [];
+// let htmlText = '';
+// let numSymbol = 0;
+// let currentWord = '';
 
 // debugger;
 
@@ -53,23 +53,27 @@ let allHighlightElems = {
 };
 
 //=======================================
-w(allHighlightElems.html.Tag);
-w(allHighlightElems.html.Tag.length);
-w(allHighlightElems.html.Tag.constructor === Array);
-debugger;
+// w(allHighlightElems.html.Tag);
+// w(allHighlightElems.html.Tag.length);
+// w(allHighlightElems.html.Tag.constructor === Array);
+// debugger;
 //=======================================
 
-let newArr = [];
-(allHighlightElems.html.Tag.forEach((elems,i) => {
-    // tmpStr = ''
-    for (let elem of elems) {
+let tmpStr = '';
+
+allHighlightElems.html.Tag.forEach((elems, index) => {
+    for (const elem of elems) {
         if (elem == '<') tmpStr += '&lt;';
         else if (elem == '>') tmpStr += '&gt;';
         else tmpStr += elem;
-        0
     }
-    
-})());
+    allHighlightElems.html.Tag[index] = tmpStr;
+    tmpStr = '';
+});
+
+debugger;
+
+llHighlightElems.html.Tag = newArr;
 
 let htmlTagElems = document.getElementsByClassName('highlight');
 
