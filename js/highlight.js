@@ -1,45 +1,4 @@
-// let separatorSymbols = [
-//     "&lt;",
-//     "&gt;",
-//     "//",
-//     "\\",
-//     "~",
-//     "`",
-//     "!",
-//     "@",
-//     '"',
-//     "#",
-//     "$",
-//     ";",
-//     "%",
-//     "^",
-//     ":",
-//     "?",
-//     "*",
-//     "(",
-//     ")",
-//     "-",
-//     "+",
-//     "*",
-//     "/",
-//     "=",
-//     "|",
-//     " ",
-//     ".",
-//     "<",
-//     ">"
-// ];
-
-// let currentWord = "";
-
-// let a = 0;
-// let newHtmlString = [];
-// let htmlText = '';
-// let numSymbol = 0;
-// let currentWord = '';
-
-// debugger;
-
+//фрагменты для окраски
 let allHighlightElems = {
     js: {
         Method: ['concat'],
@@ -52,70 +11,51 @@ let allHighlightElems = {
     },
 };
 
-//=======================================
-// w(allHighlightElems.html.Tag);
-// w(allHighlightElems.html.Tag.length);
-// w(allHighlightElems.html.Tag.constructor === Array);
-// debugger;
-//=======================================
+//подмена треугольных скобок в фрагментах выше
+!(() => {
+    let tmpStr = '';
+    allHighlightElems.html.Tag.forEach((elems, index) => {
+        for (const elem of elems) {
+            if (elem == '<')
+                tmpStr += '&lt;';
+            else if (elem == '>')
+                tmpStr += '&gt;';
+            else
+                tmpStr += elem;
+        }
+        allHighlightElems.html.Tag[index] = tmpStr;
+        tmpStr = '';
+    });
+})();
 
-let tmpStr = '';
-
-allHighlightElems.html.Tag.forEach((elems, index) => {
-    for (const elem of elems) {
-        if (elem == '<') tmpStr += '&lt;';
-        else if (elem == '>') tmpStr += '&gt;';
-        else tmpStr += elem;
-    }
-    allHighlightElems.html.Tag[index] = tmpStr;
-    tmpStr = '';
-});
-
+console.log('allHighlightElems.html.Tag = ',allHighlightElems.html.Tag);
 debugger;
 
-llHighlightElems.html.Tag = newArr;
-
+//основной процесс
 let htmlTagElems = document.getElementsByClassName('highlight');
 
 for (let htmlTagElem of htmlTagElems) {
-    a = 0;
     newHtmlString = [];
-    htmlText = htmlTagElem.innerHTML;
+    htmlTagElemText = htmlTagElem.innerHTML;
     numSymbol = 0;
     currentWord = '';
 
-    while (numSymbol < htmlText.length) {
+    debugger;
+
+    while (numSymbol < htmlTagElemText.length) {
         for (let elemTechnology in allHighlightElems) {
             for (let elemSection in allHighlightElems[elemTechnology]) {
                 for (let elem of allHighlightElems[elemTechnology][elemSection]) {
-                    //=========
-                    w('elem = ', elem);
-
-                    //===============
-                    w('htmlText.substr(numSymbol, elem.length) = ', htmlText.substr(numSymbol, elem.length));
-                    w('numSymbol = ', numSymbol);
-                    w('elem.length = ', elem.length);
-                    w('numSymbol + elem.length = ', numSymbol + elem.length);
-                    a = 0;
-                    if (numSymbol + elem.length > htmlText.length) {
-                        //===============
-                        w('сработало условие: numSymbol + elem.length > htmlText.length');
+                    if (numSymbol + elem.length > htmlTagElemText.length) {
                         continue;
                     }
-
-                    if (htmlText.substr(numSymbol, elem.length) == elem) {
-                        //==============
-                        w('совпадение');
-
+                    if (htmlTagElemText.substr(numSymbol, elem.length) == elem) {
                         //действия при совпадении
-                        currentWord += `<span class="${elemTechnology}${elemSection}">${currentWord}</span>`;
+                        currentWord += `<span class="${elemTechnology}${elemSection}">${elem}</span>`;
                         numSymbol += elem.length;
-                        //==============
-                        w('currentWord = ', currentWord);
                         break;
                     }
                     currentWord += numSymbol;
-                    w('currentWord = ', currentWord);
                 }
             }
         }
@@ -210,7 +150,3 @@ for (let htmlTagElem of htmlTagElems) {
 //     htmlTagElem.innerHTML = newHtmlString.join('');
 //     newHtmlString.length = 0;
 // }
-
-function w(str) {
-    console.log(str);
-}
