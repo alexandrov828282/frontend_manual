@@ -1,3 +1,5 @@
+"use strict";
+
 //фрагменты для окраски
 let allHighlightElems = {
     js: {
@@ -28,43 +30,72 @@ let allHighlightElems = {
     });
 })();
 
-console.log('allHighlightElems.html.Tag = ',allHighlightElems.html.Tag);
-debugger;
+// console.log('allHighlightElems.html.Tag = ',allHighlightElems.html.Tag);
 
 //основной процесс
 let htmlTagElems = document.getElementsByClassName('highlight');
 
 for (let htmlTagElem of htmlTagElems) {
-    newHtmlString = [];
-    htmlTagElemText = htmlTagElem.innerHTML;
-    numSymbol = 0;
-    currentWord = '';
-
-    debugger;
-
-    while (numSymbol < htmlTagElemText.length) {
-        for (let elemTechnology in allHighlightElems) {
-            for (let elemSection in allHighlightElems[elemTechnology]) {
-                for (let elem of allHighlightElems[elemTechnology][elemSection]) {
-                    if (numSymbol + elem.length > htmlTagElemText.length) {
-                        continue;
-                    }
-                    if (htmlTagElemText.substr(numSymbol, elem.length) == elem) {
-                        //действия при совпадении
-                        currentWord += `<span class="${elemTechnology}${elemSection}">${elem}</span>`;
-                        numSymbol += elem.length;
-                        break;
-                    }
-                    currentWord += numSymbol;
-                }
-            }
-        }
-        numSymbol++;
-    }
-    newHtmlString.push(currentWord);
-    htmlTagElem.innerHTML = newHtmlString.join('');
-    newHtmlString.length = 0;
+    htmlTagElem.innerHTML = funcTreatment(htmlTagElem.innerHTML);
 }
+
+function funcTreatment(curString) {
+    
+}
+
+function getValues() {
+    return {
+        first: getFirstValue(),
+        second: getSecondValue(),
+    };
+}
+
+
+
+
+
+
+
+
+
+
+// for (let htmlTagElem of htmlTagElems) {
+//     newHtmlString = [];
+//     htmlTagElemText = htmlTagElem.innerHTML;
+//     numSymbol = 0;
+//     currentWord = '';
+
+//     debugger;
+
+//     while (numSymbol < htmlTagElemText.length) {
+//         for (let elemTechnology in allHighlightElems) {
+//             for (let elemSection in allHighlightElems[elemTechnology]) {
+//                 for (let elem of allHighlightElems[elemTechnology][elemSection]) {
+//                     if (numSymbol + elem.length > htmlTagElemText.length) {
+//                         continue;
+//                     }
+
+//                     console.log(htmlTagElemText.substr(numSymbol, elem.length),', ',elem);
+
+//                     if (htmlTagElemText.substr(numSymbol, elem.length) == elem) {
+//                         //действия при совпадении
+//                         currentWord += `<span class="${elemTechnology}${elemSection}">${elem}</span>`;
+//                         numSymbol += elem.length;
+//                         break;
+//                     }
+//                     // currentWord += numSymbol;
+
+//                 }
+//             }
+//         }
+//         currentWord += htmlTagElemText[numSymbol];
+//         console.log(currentWord);
+//         numSymbol++;
+//     }
+//     newHtmlString.push(currentWord);
+//     htmlTagElem.innerHTML = newHtmlString.join('');
+//     newHtmlString.length = 0;
+// }
 
 // currentWord = "";
 
