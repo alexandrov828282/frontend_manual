@@ -30,8 +30,6 @@ let allHighlightElems = {
     });
 })();
 
-// console.log('allHighlightElems.html.Tag = ',allHighlightElems.html.Tag);
-
 //основной процесс
 let htmlTagElems = document.getElementsByClassName('highlight');
 
@@ -39,14 +37,27 @@ for (let htmlTagElem of htmlTagElems) {
     htmlTagElem.innerHTML = funcTreatment(htmlTagElem.innerHTML);
 }
 
-function funcTreatment(curString) {
-    
+function funcTreatment(treatmentString) {
+    let index = 0, objData = {}, resString = '';
+
+    while(treatmentString.length < index){
+        objData = coincidence(treatmentString.substring(index));
+        index = objData.newIndex;
+        resString += objData.newString;
+    }
+
+    return resString;
 }
 
-function getValues() {
+function coincidence(coincidenceString) {
+    
+    let newString = '', newIndex = 0;
+    
+    
+
     return {
-        first: getFirstValue(),
-        second: getSecondValue(),
+        newString: newString,
+        newIndex: newIndex
     };
 }
 
