@@ -32,18 +32,31 @@ let allHighlightElems = {
 
 //основной процесс
 let htmlTagElems = document.getElementsByClassName('highlight');
+console.log('htmlTagElems = ',htmlTagElems);
+
+console.log('запуск цикла обработки htmlTagElems',);
 
 for (let htmlTagElem of htmlTagElems) {
+    console.log('htmlTagElem.innerHTML перед обработкой = ',htmlTagElem.innerHTML);
     htmlTagElem.innerHTML = funcTreatment(htmlTagElem.innerHTML);
+    console.log('htmlTagElem.innerHTML после обработки = ',htmlTagElem.innerHTML);
 }
 
 function funcTreatment(treatmentString) {
     let index = 0, objData = {}, resString = '';
+    console.log('запуск работы  funcTreatment, переданная строка = ',treatmentString);
 
+    console.log('запуск цикла по перебору обрабатываемой строки посимвольно',);
     while(treatmentString.length < index){
+        console.log('перед обработкой:');
+        console.log('treatmentString.length = ',treatmentString.length);
+        console.log('index = ',index);
         objData = coincidence(treatmentString.substring(index));
-        index = objData.newIndex;
-        resString += objData.newString;
+        index += objData.addIndex;
+        resString += objData.addString;
+        console.log('после обработки:');
+        console.log('objData.addIndex = ',objData.addIndex);
+        console.log('objData.addString = ',objData.addString);
     }
 
     return resString;
@@ -53,11 +66,27 @@ function coincidence(coincidenceString) {
     
     let newString = '', newIndex = 0;
     
-    
+    for (let elemTechnology in allHighlightElems){
+        for (let elemSection in allHighlightElems[elemTechnology]){
+            for (let elem of allHighlightElems[elemTechnology][elemSection]){
+                //проверка - остаток строки, переданный сюда на обработку 
+                //должен быть не меньше, чем образец для покраски
+                if (coincidenceString.length < elem.length) continue;
+                //проверка на совпадение
+                if (coincidenceString.substring(0,elem.length-1) == elem){
+                    return {
+                        addString: `<span class="${elemTechnology}${elemSection}">${elem}</span>`,
+                        addIndex: elem.length
+                    }
+                }
+
+            }
+        }
+    }
 
     return {
-        newString: newString,
-        newIndex: newIndex
+        addString: coincidenceString.substring(0,1),
+        addIndex: 1
     };
 }
 
